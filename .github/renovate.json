@@ -1,0 +1,43 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:base",
+    ":dependencyDashboard"
+  ],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["gradle"],
+      "groupName": "gradle dependencies"
+    },
+    {
+      "matchPackagePatterns": ["hugo"],
+      "groupName": "hugo updates"
+    },
+    {
+      "matchPackagePatterns": ["nplus-book-core"],
+      "groupName": "nplus book core",
+      "automerge": false
+    }
+  ],
+  "gomod": {
+    "enabled": true,
+    "postUpdateOptions": ["gomodTidy"]
+  },
+  "gradle-wrapper": { "enabled": true },
+  "regexManagers": [
+    {
+      "description": "Update Hugo version in build.gradle.kts",
+      "fileMatch": ["^build\\.gradle\\.kts$"],
+      "matchStrings": ["version\\.set\\(\"(?<currentValue>.*?)\"\\)"],
+      "depNameTemplate": "gohugoio/hugo",
+      "datasourceTemplate": "github-releases"
+    },
+    {
+      "description": "Update Hugo version in GitHub Actions (deploy.yml)",
+      "fileMatch": ["^\\.github/workflows/.*\\.yml$"],
+      "matchStrings": ["hugo-version: ['\"]?(?<currentValue>[0-9.]+)['\"]?"],
+      "depNameTemplate": "gohugoio/hugo",
+      "datasourceTemplate": "github-releases"
+    }
+  ]
+}

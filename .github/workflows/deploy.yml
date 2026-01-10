@@ -1,0 +1,57 @@
+name: Deploy Hugo Site
+on:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+          fetch-depth: 0
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Run Spotless Check
+        run: ./gradlew spotlessCheck --no-daemon
+
+      - name: Fail if Spotless errors
+        if: failure()
+        run: |
+          echo "❌ Markdown formatting failed Spotless check."
+          exit 1
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: '0.154.0' # 建議填入你本地目前成功的版本
+          extended: true
+
+      - uses: actions/cache@v4
+        with:
+          path: /tmp/hugo_cache
+          key: ${{ runner.os }}-hugo-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-hugo-
+
+      - name: Build the site
+        working-directory: site
+        run: hugo --minify --gc --baseURL "https://nplus.wiki/${{ github.event.repository.name }}/" --cacheDir /tmp/hugo_cache
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: site/public
+          keep_files: false

@@ -1,0 +1,31 @@
+/.gradle/
+/build/
+
+.idea
+*.iws
+*.iml
+*.ipr
+
+out/
+*.class
+*.jar
+
+!gradle/wrapper/gradle-wrapper.jar
+
+### Kotlin ###
+.kotlin
+
+
+### Mac OS ###
+.DS_Store
+
+# ───── Hugo ─────
+/public/
+/site/.hugo_build.lock
+/site/public/
+/site/.hugo_cache/
+/site/resources/_gen/
+/hugo_stats.json
+/themes/
+
+/go.sum/themes/
