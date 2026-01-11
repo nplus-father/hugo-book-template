@@ -10,7 +10,6 @@ path = "github.com/Andrewnplus/nplus-book-core"
 BookSection = "docs"
 BookTheme = "light"
 BookLogo = "logo.png"
-BookCollapseSection = true
 
 
 [markup.highlight]
