@@ -25,11 +25,7 @@
         "indirect"
       ],
       "groupName": "nplus book core",
-      "enabled": true,
-      "automerge": true,
-      "major": {
-        "automerge": false
-      }
+      "enabled": true
     }
   ],
   "gomod": {
@@ -70,5 +66,9 @@
   ],
   "dependencyDashboard": true,
   "dependencyDashboardApproval": false,
-  "timezone": "Asia/Taipei"
+  "timezone": "Asia/Taipei",
+  "automerge": true,
+  "major": {
+    "automerge": false
+  }
 }
