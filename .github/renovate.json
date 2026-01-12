@@ -61,14 +61,15 @@
       "datasourceTemplate": "github-releases"
     }
   ],
-  "assignees": [
-    "Andrewnplus"
-  ],
+  "assignees": [],
   "dependencyDashboard": true,
   "dependencyDashboardApproval": false,
   "timezone": "Asia/Taipei",
   "automerge": true,
   "major": {
-    "automerge": false
+    "automerge": false,
+    "assignees": [
+      "Andrewnplus"
+    ]
   }
 }
