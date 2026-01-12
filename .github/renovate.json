@@ -18,16 +18,14 @@
       "groupName": "hugo updates"
     },
     {
-      "matchPackagePatterns": [
-        "nplus-book-core"
+      "matchPackageNames": [
+        "github.com/Andrewnplus/nplus-book-core"
+      ],
+      "matchDepTypes": [
+        "indirect"
       ],
       "groupName": "nplus book core",
       "automerge": false,
-      "matchDepTypes": [
-        "action",
-        "gomod",
-        "indirect"
-      ],
       "enabled": true
     }
   ],
