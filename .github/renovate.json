@@ -61,5 +61,10 @@
       "depNameTemplate": "gohugoio/hugo",
       "datasourceTemplate": "github-releases"
     }
-  ]
+  ],
+  "assignees": [
+    "Andrewnplus"
+  ],
+  "dependencyDashboard": true,
+  "dependencyDashboardApproval": true
 }
