@@ -6,6 +6,14 @@
   ],
   "packageRules": [
     {
+      "matchUpdateTypes": [
+        "patch",
+        "digest",
+        "pin"
+      ],
+      "enabled": false
+    },
+    {
       "matchPackagePatterns": [
         "gradle"
       ],
