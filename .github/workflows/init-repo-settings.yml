@@ -1,0 +1,27 @@
+name: Initialize Repo Settings
+on:
+  push:
+    branches: [ "main", "master" ]
+    # 這裡設定為每次推送到 main 都會跑，
+    # 但因為指令是冪等的 (Idempotent)，重複跑沒壞處，
+    # 這樣確保新專案建立後第一次 Push 就會觸發。
+
+jobs:
+  configure-settings:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Enable Auto-Merge & Auto-Delete Branches
+        env:
+          # 這裡引用我們剛剛存的 Secret
+          GH_TOKEN: ${{ secrets.GH_PAT_ADMIN }}
+        run: |
+          echo "🔧 設定 GitHub Repository 功能..."
+          
+          # 1. 開啟 Auto-merge
+          # 2. 開啟 Delete branch on merge (保持乾淨)
+          gh repo edit ${{ github.repository }} --enable-auto-merge --delete-branch-on-merge
+          
+          echo "✅ 設定完成！Auto-merge 已開啟。"
