@@ -6,6 +6,7 @@
   ],
   "packageRules": [
     {
+      "description": "Ignore patch and digest updates to save CI resources",
       "matchUpdateTypes": [
         "patch",
         "digest",
@@ -14,12 +15,25 @@
       "enabled": false
     },
     {
+      "description": "Group all major updates into a single PR for manual review",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "groupName": "all major updates",
+      "automerge": false,
+      "assignees": [
+        "Andrewnplus"
+      ]
+    },
+    {
+      "description": "Group gradle wrappers and plugins",
       "matchPackagePatterns": [
         "gradle"
       ],
       "groupName": "gradle dependencies"
     },
     {
+      "description": "Specific grouping for Hugo",
       "matchPackagePatterns": [
         "hugo"
       ],
