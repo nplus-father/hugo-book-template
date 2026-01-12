@@ -1,10 +1,10 @@
 plugins {
     id("com.diffplug.spotless") version "6.25.0"
-    id("io.github.fstaudt.hugo") version "0.10.0"
+    id("io.github.fstaudt.hugo") version "0.12.0"
 }
 
 hugo {
-    version.set("0.154.0")
+    version.set("0.154.5")
     sourceDirectory.set("site")
 }
 
