@@ -6,36 +6,60 @@
   ],
   "packageRules": [
     {
-      "matchPackagePatterns": ["gradle"],
+      "matchPackagePatterns": [
+        "gradle"
+      ],
       "groupName": "gradle dependencies"
     },
     {
-      "matchPackagePatterns": ["hugo"],
+      "matchPackagePatterns": [
+        "hugo"
+      ],
       "groupName": "hugo updates"
     },
     {
-      "matchPackagePatterns": ["nplus-book-core"],
+      "matchPackagePatterns": [
+        "nplus-book-core"
+      ],
       "groupName": "nplus book core",
-      "automerge": false
+      "automerge": false,
+      "matchDepTypes": [
+        "action",
+        "gomod",
+        "indirect"
+      ],
+      "enabled": true
     }
   ],
   "gomod": {
     "enabled": true,
-    "postUpdateOptions": ["gomodTidy"]
+    "postUpdateOptions": [
+      "gomodTidy"
+    ]
   },
-  "gradle-wrapper": { "enabled": true },
+  "gradle-wrapper": {
+    "enabled": true
+  },
   "regexManagers": [
     {
       "description": "Update Hugo version in build.gradle.kts",
-      "fileMatch": ["^build\\.gradle\\.kts$"],
-      "matchStrings": ["version\\.set\\(\"(?<currentValue>.*?)\"\\)"],
+      "fileMatch": [
+        "^build\\.gradle\\.kts$"
+      ],
+      "matchStrings": [
+        "version\\.set\\(\"(?<currentValue>.*?)\"\\)"
+      ],
       "depNameTemplate": "gohugoio/hugo",
       "datasourceTemplate": "github-releases"
     },
     {
       "description": "Update Hugo version in GitHub Actions (deploy.yml)",
-      "fileMatch": ["^\\.github/workflows/.*\\.yml$"],
-      "matchStrings": ["hugo-version: ['\"]?(?<currentValue>[0-9.]+)['\"]?"],
+      "fileMatch": [
+        "^\\.github/workflows/.*\\.yml$"
+      ],
+      "matchStrings": [
+        "hugo-version: ['\"]?(?<currentValue>[0-9.]+)['\"]?"
+      ],
       "depNameTemplate": "gohugoio/hugo",
       "datasourceTemplate": "github-releases"
     }
