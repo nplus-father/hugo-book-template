@@ -25,8 +25,11 @@
         "indirect"
       ],
       "groupName": "nplus book core",
-      "automerge": false,
-      "enabled": true
+      "enabled": true,
+      "automerge": true,
+      "major": {
+        "automerge": false
+      }
     }
   ],
   "gomod": {
@@ -66,5 +69,6 @@
     "Andrewnplus"
   ],
   "dependencyDashboard": true,
-  "dependencyDashboardApproval": true
+  "dependencyDashboardApproval": false,
+  "timezone": "Asia/Taipei"
 }
