@@ -1,12 +1,11 @@
+# Drop this file into a HugoBook repo as .github/workflows/ci-check.yml.
+
 name: CI Check
+
 on:
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
 
 jobs:
-  dummy-check:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Acknowledge
-        run: echo "✅ Dummy CI check passed to satisfy Branch Protection"
-
+  check:
+    uses: nplus-father/workflows/.github/workflows/ci-check.yml@v1

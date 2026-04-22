@@ -1,61 +1,25 @@
-name: Deploy Hugo Site
+# Drop this file into a HugoBook repo as .github/workflows/deploy.yml.
+# It replaces the whole 60-line per-repo deploy pipeline.
+
+name: Deploy
+
 on:
   push:
-    branches: [ main ]
-
-permissions:
-  contents: write
-  pages: write
-  id-token: write
-  packages: read
+    branches: [main]
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          submodules: true
-          fetch-depth: 0
-
-      - uses: actions/setup-java@v5
-        with:
-          distribution: temurin
-          java-version: 21
-
-      - name: Run Spotless Check
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_ACTOR: ${{ github.actor }}
-        run: ./gradlew spotlessCheck --no-daemon
-
-      - name: Fail if Spotless errors
-        if: failure()
-        run: |
-          echo "❌ Markdown formatting failed Spotless check."
-          exit 1
-
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v3
-        with:
-          hugo-version: '0.154.5'
-          extended: true
-
-      - uses: actions/cache@v5
-        with:
-          path: /tmp/hugo_cache
-          key: ${{ runner.os }}-hugo-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-hugo-
-
-      - name: Build the site
-        working-directory: site
-        run: hugo --minify --gc --baseURL "https://nplus.wiki/${{ github.event.repository.name }}/" --cacheDir /tmp/hugo_cache
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: site/public
-          keep_files: false
+  deploy:
+    uses: nplus-father/workflows/.github/workflows/hugobook-build-deploy.yml@v1
+    permissions:
+      # Default set covers deploy-mode=pages-artifact (the default).
+      # If you override to deploy-mode=gh-pages-branch, change to:
+      #   contents: write
+      #   (drop pages/id-token since they're unused for branch deploy)
+      contents: read
+      pages: write
+      id-token: write
+    secrets: inherit
+    # with:
+    #   hugo-version: '0.155.0'
+    #   deploy-mode: 'gh-pages-branch'
+    #   run-spotless: false
