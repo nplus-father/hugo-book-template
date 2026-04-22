@@ -26,7 +26,7 @@ These steps require **JDK 17+** to be installed on your system:
 
 ### 1. Clone the Repository
 ```bash
-git clone git@github.com:Andrewnplus/hugo-book-template.git
+git clone git@github.com:nplus-father/hugo-book-template.git
 cd hugo-book-template
 ```
 

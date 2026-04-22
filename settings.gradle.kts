@@ -1,9 +1,9 @@
 pluginManagement {
     repositories {
         maven {
-            url = uri("https://maven.pkg.github.com/Andrewnplus/book-gradle-conventions")
+            url = uri("https://maven.pkg.github.com/nplus-father/book-gradle-conventions")
             credentials {
-                username = System.getenv("GITHUB_ACTOR") ?: "Andrewnplus"
+                username = System.getenv("GITHUB_ACTOR") ?: "nplus-father"
                 password = System.getenv("GITHUB_TOKEN") ?: System.getenv("GH_TOKEN") ?: ""
             }
         }

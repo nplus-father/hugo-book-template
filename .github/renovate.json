@@ -1,4 +1,4 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["github>Andrewnplus/renovate-config"]
+  "extends": ["github>nplus-father/workflows//renovate"]
 }
